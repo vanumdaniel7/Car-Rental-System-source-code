@@ -38,7 +38,7 @@ router.get("/verify/:token", async (req, res) => {
                     });
                 }
             }
-            const result = await auth.verifyUser(decoded.data.userid);
+            const result = await auth.verifyUser(decoded.data.email);
             res.json(result);
         });
     } catch(err) {

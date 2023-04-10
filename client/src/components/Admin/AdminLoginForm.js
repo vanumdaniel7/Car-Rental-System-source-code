@@ -1,10 +1,13 @@
 import { Button, FormLabel, Input, Spinner, useToast } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
 import { useState, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { adminActions } from "../../Store";
 
 const AdminLoginForm = () => {
     const toast = useToast();
     const history = useHistory();
+    const dispatch = useDispatch();
     const adminAccessKeyRef = useRef("");
     const [isLoading, setIsLoading] = useState(false);
     const submitHandler = async event => {
@@ -25,6 +28,7 @@ const AdminLoginForm = () => {
             const res = await result.json();
             if(res.data) {
                 localStorage.setItem("adminToken", res.data);
+                dispatch(adminActions.handleAuthState());
                 history.push("/admin/home");
             }
             toast({
@@ -45,6 +49,7 @@ const AdminLoginForm = () => {
                 duration: 10000,
                 isClosable: true,
             });
+            setIsLoading(false);
         }
     }
     return (

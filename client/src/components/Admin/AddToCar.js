@@ -76,19 +76,19 @@ const AddToCar = () => {
                             </FormControl>
                             <FormControl mb = "25px" isRequired = {true}>
                                 <FormLabel>Price</FormLabel>
-                                <Input ref = {priceRef} type = "number" focusBorderColor = "teal.400"/>
+                                <Input min = "0" ref = {priceRef} type = "number" focusBorderColor = "teal.400"/>
                             </FormControl>
                             <FormControl mb = "25px" isRequired = {true}>
                                 <FormLabel>Base Amount</FormLabel>
-                                <Input ref = {baseAmountRef} type = "number" focusBorderColor = "teal.400"/>
+                                <Input min = "0" ref = {baseAmountRef} type = "number" focusBorderColor = "teal.400"/>
                             </FormControl>
                             <FormControl mb = "25px" isRequired = {true}>
                                 <FormLabel>₹/km</FormLabel>
-                                <Input ref = {rupeePerKmRef} type = "number" focusBorderColor = "teal.400"/>
+                                <Input min = "0" ref = {rupeePerKmRef} type = "number" focusBorderColor = "teal.400"/>
                             </FormControl>
                             <FormControl mb = "25px" isRequired = {true}>
                                 <FormLabel>₹/hour</FormLabel>
-                                <Input ref = {rupeePerHourRef} type = "number" focusBorderColor = "teal.400"/>
+                                <Input min = "0" ref = {rupeePerHourRef} type = "number" focusBorderColor = "teal.400"/>
                             </FormControl>
                             <FormControl mb = "25px" isRequired = {true}>
                                 <FormLabel position = "relative" top = "4px">Image Link</FormLabel>

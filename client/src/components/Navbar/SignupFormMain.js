@@ -9,9 +9,21 @@ const SignupFormMain = () => {
     const [isLoading, setIsLoading] = useState(false);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const submitHandler = async event => {
+        event.preventDefault();
         setIsLoading(true);
         try {
-            event.preventDefault();
+            if(!(nameRef.current.value.search(/[^a-zA-Z]+/) === -1)) {
+                toast({
+                    position: "top",
+                    title: "Warning",
+                    description: "Name can only contain alphabets",
+                    status: "warning",
+                    duration: 10000,
+                    isClosable: true,
+                });
+                setIsLoading(false);
+                return;
+            }
             const data = {
                 name: nameRef.current.value,
                 email: emailRef.current.value,

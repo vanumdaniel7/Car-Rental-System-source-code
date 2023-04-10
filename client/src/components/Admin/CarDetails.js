@@ -36,7 +36,6 @@ const OptionButton = props => {
             setIsLoading(false);
             onClose();
         } catch(err) {
-            console.log(err);
             toast({
                 position: "top",
                 title: "Error",
@@ -45,6 +44,7 @@ const OptionButton = props => {
                 duration: 10000,
                 isClosable: true,
             });
+            setIsLoading(false);
         }
     }
     return (

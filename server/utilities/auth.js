@@ -12,9 +12,9 @@ module.exports =  {
             throw error;
         }
     },
-    verifyUser: async userid => {
+    verifyUser: async email => {
         try {
-            const result = await db.updateUserVerificationStatus(userid);
+            const result = await db.updateUserVerificationStatus(email);
             return result;
         } catch(err) {
             throw err;
@@ -57,7 +57,6 @@ module.exports =  {
         const token = req.headers.authorization;
         jwt.verify(token, process.env.ADMIN_ACCESS_KEY, (err, decoded) => {
             if(err) {
-                console.log(decoded);
                 if(err.name === "TokenExpiredError") {
                     return res.json({
                         status: "warning",

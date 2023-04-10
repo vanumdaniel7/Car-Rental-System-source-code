@@ -3,6 +3,17 @@ const db = require("../db/index.js");
 const auth = require("../utilities/auth.js");
 const router = express.Router();
 
+const dateCompare = (d1, d2) => {
+    const date1 = new Date(d1);
+    const date2 = new Date(d2);
+    if(date1 > date2) {
+        return 1;
+    } else if(date1 < date2) {
+        return -1;
+    }
+    return 0;
+}
+
 router.get("/", async (req, res) => {
     try {
         const { carName, type, price } = req.query;
@@ -36,6 +47,16 @@ router.post("/rent", auth.requireAuthentication, async (req, res) => {
     try {
         const { carId, carType, expectedReturn } = req.body;
         const modifiedExpectedReturn = expectedReturn.substr(8, 2) + "/" + expectedReturn.substr(5, 2) + "/" + expectedReturn.substr(0, 4);
+        const currDate = new Date(Date.now());
+        modifiedCurrDate = currDate.toLocaleString("en-GB").substring(0, 10);
+        const checkPastDate = dateCompare(modifiedExpectedReturn, modifiedCurrDate);
+        if(checkPastDate < 0) {
+            return res.json({
+                info: "Date cannot be past date",
+                status: "warning",
+                title: "Warning"
+            });
+        }
         const result = await db.rentCar(carId, modifiedExpectedReturn, res.locals.userid, carType);
         res.json(result);
     } catch(err) {

@@ -50,6 +50,7 @@ const RentCarButton = props => {
                 duration: 10000,
                 isClosable: true,
             });
+            setIsLoading(false);
         }
     }
     return (

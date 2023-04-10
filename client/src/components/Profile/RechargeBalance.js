@@ -48,6 +48,7 @@ const RechargeBalance = () => {
                 duration: 10000,
                 isClosable: true,
             });
+            setIsLoading(false);
         }
     }
     return (
@@ -63,7 +64,7 @@ const RechargeBalance = () => {
                     <form onSubmit = {submitHandler}>
                         <FormControl mt={4}>
                             <FormLabel mb = {4}>Enter Amount</FormLabel>
-                            <Input ref = {balanceRef} variant="outline" focusBorderColor="teal.400" placeholder="enter username..." type="number"/>
+                            <Input ref = {balanceRef} min = "1" variant="outline" focusBorderColor="teal.400" placeholder="enter username..." type="number"/>
                         </FormControl>
                         <FormControl mt={6}>
                             <Button variant="solid" width="100%" type="submit" colorScheme="teal">{isLoading ? <Spinner/> : "Recharge Amount"}</Button>

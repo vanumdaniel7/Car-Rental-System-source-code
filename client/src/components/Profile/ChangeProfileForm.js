@@ -15,6 +15,18 @@ const ChangeProfileForm = () => {
         setIsLoading(true);
         event.preventDefault();
         try {
+            if(!(nameRef.current.value.search(/[^a-zA-Z]+/) === -1)) {
+                toast({
+                    position: "top",
+                    title: "Warning",
+                    description: "Name can only contain alphabets",
+                    status: "warning",
+                    duration: 10000,
+                    isClosable: true,
+                });
+                setIsLoading(false);
+                return;
+            }
             const result = await fetch(`http://localhost:3000/auth/?name=${nameRef.current.value}&&password=${passwordRef.current.value}`, {
                 mode: "cors",
                 method: "PATCH",
