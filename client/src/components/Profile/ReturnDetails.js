@@ -17,33 +17,33 @@ const ReturnDetails = props => {
                                 <Thead>
                                     <Tr>
                                         <Th>Car Name</Th>
-                                        <Th>{props.carname}</Th>
+                                        <Th>{props.details.carname}</Th>
                                     </Tr>
                                 </Thead>
                                 <Tbody>
                                     <Tr>
                                         <Td>Type</Td>
-                                        <Td>{props.cartype}</Td>
+                                        <Td>{props.details.cartype}</Td>
                                     </Tr>
                                     <Tr>
                                         <Td>Base Amount</Td>
-                                        <Td>{props.baseamount}</Td>
+                                        <Td>{props.details.baseamount}</Td>
                                     </Tr>
                                     <Tr>
                                         <Td>Distance Travelled</Td>
-                                        <Td>{parseInt(props.milemeterend) - parseInt(props.milemeterstart)}</Td>
+                                        <Td>{parseInt(props.details.milemeterend) - parseInt(props.details.milemeterstart)}</Td>
                                     </Tr>
                                     <Tr>
                                         <Td>Rented on</Td>
-                                        <Td>{props.rentedon}</Td>
+                                        <Td>{props.details.rentedon}</Td>
                                     </Tr>
                                     <Tr>
                                         <Td>Returned on</Td>
-                                        <Td>{props.returnedon}</Td>
+                                        <Td>{props.details.returnedon}</Td>
                                     </Tr>
                                     <Tr>
                                         <Td>Per Km Charge</Td>
-                                        <Td>{props.rupeeperkm}</Td>
+                                        <Td>{props.details.rupeeperkm}</Td>
                                     </Tr>
                                     <Tr>
                                         <Td>Per Hour Charge</Td>
@@ -51,13 +51,13 @@ const ReturnDetails = props => {
                                     </Tr>
                                     <Tr>
                                         <Td>Gas Consumed</Td>
-                                        <Td>{props.gasconsumed}</Td>
+                                        <Td>{props.details.gasconsumed}</Td>
                                     </Tr>
                                 </Tbody>
                                 <Tfoot>
                                     <Tr>
                                         <Th fontSize = "lg">Total Travelling Charge</Th>
-                                        <Th fontSize = "lg">{props.amountpaid}</Th>
+                                        <Th fontSize = "lg">{props.details.amountpaid}</Th>
                                     </Tr>
                                 </Tfoot>
                             </Table>
