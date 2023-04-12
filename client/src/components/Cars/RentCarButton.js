@@ -41,6 +41,7 @@ const RentCarButton = props => {
                 isClosable: true,
             });
             setIsLoading(false);
+            onClose();
         } catch(err) {
             toast({
                 position: "top",

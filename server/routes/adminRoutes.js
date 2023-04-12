@@ -29,7 +29,6 @@ router.post("/login", async (req, res) => {
             });
         }
     } catch(err) {
-        console.log(err);
         res.json({ 
             info :"An unexpected error occured, please try again later", 
             status: "error", 
@@ -44,7 +43,6 @@ router.get("/inventory", auth.requireAdminAuthentication, async (req, res) => {
         const result = await db.getCarData(availablity);
         res.json(result);
     } catch(err) {
-        console.log(err);
         res.json({ 
             info :"An unexpected error occured, please try again later", 
             status: "error", 
@@ -59,7 +57,6 @@ router.delete("/:numberPlate/sell", auth.requireAdminAuthentication, async (req,
         const result = await db.deleteInventoryItem(numberPlate);
         res.json(result);
     } catch(err) {
-        console.log(err);
         res.json({ 
             info :"An unexpected error occured, please try again later", 
             status: "error", 
@@ -74,7 +71,6 @@ router.patch("/:numberPlate/repair", auth.requireAdminAuthentication, async (req
         const result = await db.repairCar(numberPlate);
         res.json(result);
     } catch(err) {
-        console.log(err);
         res.json({ 
             info :"An unexpected error occured, please try again later", 
             status: "error", 
@@ -89,7 +85,6 @@ router.patch("/:numberPlate/retrieve", auth.requireAdminAuthentication, async (r
         const result = await db.retrieveCar(numberPlate);
         res.json(result);
     } catch(err) {
-        console.log(err);
         res.json({ 
             info :"An unexpected error occured, please try again later", 
             status: "error", 
@@ -103,7 +98,6 @@ router.get("/rents", auth.requireAdminAuthentication, async (req, res) => {
         const result = await db.getRentData();
         res.json(result);
     } catch(err) {
-        console.log(err);
         res.json({ 
             info :"An unexpected error occured, please try again later", 
             status: "error", 
@@ -114,14 +108,40 @@ router.get("/rents", auth.requireAdminAuthentication, async (req, res) => {
 
 router.patch("/return", auth.requireAdminAuthentication, async (req, res) => {
     try {
-        let { rentId, mileMeterEnd, gasConsumed, refundAmount } = req.body;
+        let { rentId, mileMeterEnd, gasConsumed, refundAmount, mileMeterStart, baseAmount } = req.body;
         mileMeterEnd = parseInt(mileMeterEnd);
         gasConsumed = parseInt(gasConsumed);
         refundAmount = parseInt(refundAmount);
+        mileMeterStart = parseInt(mileMeterStart);
+        baseAmount = parseInt(baseAmount);
+        if(mileMeterEnd < mileMeterStart) {
+            return res.json({
+                title: "warning",
+                status: "warning",
+                info: "Milemeter end cant be less than milemeter start"
+            });
+        } else if(gasConsumed < 0) {
+            return res.json({
+                title: "warning",
+                status: "warning",
+                info: "Gas consumed cant be less than zero"
+            });
+        } else if(refundAmount < 0) {
+            return res.json({
+                title: "warning",
+                status: "warning",
+                info: "Refund amount cant be less than 0"
+            });
+        } else if(refundAmount > baseAmount) {
+            return res.json({
+                title: "warning",
+                status: "warning",
+                info: "Refund amount cant be greater than baseamount"
+            });
+        }
         const result = await db.returnCar(rentId, mileMeterEnd, gasConsumed, refundAmount);
         res.json(result);
     } catch(err) {
-        console.log(err);
         res.json({ 
             info :"An unexpected error occured, please try again later", 
             status: "error", 
@@ -132,11 +152,39 @@ router.patch("/return", auth.requireAdminAuthentication, async (req, res) => {
 
 router.post("/cars", auth.requireAdminAuthentication, async (req, res) => {
     try {
-        const { carname, price, baseamount, rupeeperkm, rupeeperhour, imagelink } = req.body;
+        let { carname, price, baseamount, rupeeperkm, rupeeperhour, imagelink } = req.body;
+        price = parseInt(price);
+        baseamount = parseInt(baseamount);
+        rupeeperkm = parseInt(rupeeperkm);
+        rupeeperhour = parseInt(rupeeperhour);
+        if(price < 0) {
+            return res.json({
+                info: "Price cant be negative", 
+                status: "warning", 
+                title: "Warning" 
+            });
+        } else if(baseamount < 0) {
+            return res.json({
+                info: "Base amount cant be negative",
+                status: "warning",
+                title: "Warning"
+            });
+        } else if(rupeeperkm < 0) {
+            return res.json({
+                info: "Rupee per kilometer cant be negative",
+                status: "warning",
+                title: "Warning"
+            });
+        } else if(rupeeperhour < 0) {
+            return res.json({
+                info: "Rupee per hour cant be negative",
+                status: "warning",
+                title: "Warning"
+            });
+        }
         const result = await db.insertCarModel(carname, price, baseamount, rupeeperkm, rupeeperhour, imagelink);
         res.json(result);
     } catch(err) {
-        console.log(err);
         res.json({ 
             info :"An unexpected error occured, please try again later", 
             status: "error", 
@@ -150,7 +198,6 @@ router.get("/cars", auth.requireAdminAuthentication, async (req, res) => {
         const result = await db.getCarModels();
         res.json(result);
     } catch(err) {
-        console.log(err);
         res.json({ 
             info :"An unexpected error occured, please try again later", 
             status: "error", 
@@ -165,7 +212,6 @@ router.delete("/cars", auth.requireAdminAuthentication, async (req, res) => {
         const result = await db.deleteCarItem(carId);
         res.json(result);
     } catch(err) {
-        console.log(err);
         res.json({ 
             info :"An unexpected error occured, please try again later", 
             status: "error", 

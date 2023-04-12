@@ -19,6 +19,7 @@ const Filters = () => {
                 }
             });
             const res = await result.json();
+            console.log(res);
             if(res.status === "success") {
                 dispatch(carActions.getCars(res.data));
             }

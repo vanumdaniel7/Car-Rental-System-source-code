@@ -50,22 +50,7 @@ const AddToInventory = () => {
     const addCarHandler = async event => {
         try {
             event.preventDefault();
-            console.log("ok1");
             setIsLoading(true);
-            const numberPlateRegex = /[A-Z]{2}[0-9]{2}\s[A-Z]{2}[0-9]{4}/;
-            if(numberPlateRef.current.value.match(numberPlateRegex) === null) {
-                console.log("ok2");
-                toast({
-                    position: "top",
-                    title: "Warning",
-                    description: "Number plate can only be in the format: AAXX AAXXXX",
-                    status: "warning",
-                    duration: 10000,
-                    isClosable: true,
-                });
-                setIsLoading(false);
-                return;
-            }
             const data = {
                 carId: idRef.current.value,
                 carType: typeRef.current.value,

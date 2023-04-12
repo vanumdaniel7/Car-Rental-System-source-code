@@ -27,7 +27,10 @@ router.get("/", async (req, res) => {
         } else if(price === "6000") {
             lowerBound = 4000;
             upperBound = 6000;
-        } else {
+        } else if(price == "infinity") {
+            lowerBound = 6000;
+            upperBound = 1000000;
+        } else {              
             lowerBound = 0;
             upperBound = 1000000;
         }
@@ -60,7 +63,6 @@ router.post("/rent", auth.requireAuthentication, async (req, res) => {
         const result = await db.rentCar(carId, modifiedExpectedReturn, res.locals.userid, carType);
         res.json(result);
     } catch(err) {
-        console.log(err);
         res.json({
             info: "An unexpected error occured, please try again later", 
             status: "error", 
@@ -74,7 +76,6 @@ router.get("/models", auth.requireAdminAuthentication, async (req, res) => {
         const result = await db.getCarModels();
         res.json(result);
     } catch(err) {
-        console.log(err);
         res.json({
             info: "An unexpected error occured, please try again later", 
             status: "error", 
@@ -85,7 +86,21 @@ router.get("/models", auth.requireAdminAuthentication, async (req, res) => {
 
 router.post("/", auth.requireAdminAuthentication, async (req, res) => {
     try {
-        const { carId, carType, numberPlate, mileMeterReading } = req.body;
+        let { carId, carType, numberPlate, mileMeterReading } = req.body;
+        mileMeterReading = parseInt(mileMeterReading);
+        if(mileMeterReading < 0) {
+            return res.json({
+                info: "Milemeter reading cant be less than zero",
+                status: "warning",
+                title: "Warning"
+            });
+        } else if(numberPlate.match(/[A-Z]{2}[0-9]{2}\s[A-Z]{2}[0-9]{4}/) === null) {
+            return res.json({
+                info: "Number plate can only be in the format AAXX AAXXXX",
+                title: "Warning",
+                status: "warning"
+            });
+        }
         const result = await db.insertInventory(carId, carType, numberPlate, mileMeterReading);
         res.json(result);
     } catch(err) {

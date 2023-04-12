@@ -8,7 +8,7 @@ if(process.env.NODE_ENV !== "production") {
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: "noreply.crsapp@gmail.com",
+        user: "noreply.carrentalapp@gmail.com",
         pass: process.env.MAIL_PASSWORD
     }
 });

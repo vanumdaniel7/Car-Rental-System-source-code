@@ -20,7 +20,6 @@ const ReturnedList = () => {
                     }
                 });
                 const res = await result.json();
-                console.log(res);
                 if(res.status === "success") {
                     dispatch(userActions.getReturnedCars(res.data));
                 }

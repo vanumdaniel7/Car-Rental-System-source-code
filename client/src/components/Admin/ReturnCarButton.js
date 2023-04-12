@@ -16,7 +16,9 @@ const ReturnCarButton = props => {
                 rentId: props.details.rentid,
                 mileMeterEnd: mileMeterEndRef.current.value,
                 gasConsumed: gasConsumedRef.current.value,
-                refundAmount: refundAmountRef.current.value
+                refundAmount: refundAmountRef.current.value,
+                mileMeterStart: props.details.milemeterstart,
+                baseAmount: (props.details.cartype === "AC" ? props.details.baseamount * 1.5 : props.details.baseamount)
             }
             const result = await fetch("http://localhost:3000/admin/return", {
                 method: "PATCH",
@@ -63,15 +65,15 @@ const ReturnCarButton = props => {
                         <ModalBody>
                             <FormControl isRequired = {true} mb = "25px">
                                 <FormLabel>Milemeter reading at end <Text fontSize = "13px" position = "relative" top = "-1px" display = "inline">(Should be more than milemeter Start)</Text></FormLabel>
-                                <Input min = {props.details.milemeterstart} ref = {mileMeterEndRef} type = "number" focusBorderColor = "teal.400"/>
+                                <Input ref = {mileMeterEndRef} type = "number" focusBorderColor = "teal.400"/>
                             </FormControl>
                             <FormControl isRequired = {true} mb = "25px">
                                 <FormLabel>Gas consumed <Text fontSize = "13px" position = "relative" top = "-1px" display = "inline">(In Liters)</Text></FormLabel>
-                                <Input min = {0} ref = {gasConsumedRef} type = "number" focusBorderColor = "teal.400"/>
+                                <Input ref = {gasConsumedRef} type = "number" focusBorderColor = "teal.400"/>
                             </FormControl>
                             <FormControl isRequired = {true} mb = "25px">
                                 <FormLabel>Refund Amount <Text fontSize = "13px" position = "relative" top = "-1px" display = "inline">(Should be less than base amount)</Text></FormLabel>
-                                <Input min = {0} max = {props.details.cartype === "AC" ? props.details.baseamount * 1.5 : props.details.baseamount} ref = {refundAmountRef} type = "number" focusBorderColor = "teal.400"/>
+                                <Input ref = {refundAmountRef} type = "number" focusBorderColor = "teal.400"/>
                             </FormControl>
                         </ModalBody>
                         <ModalFooter>

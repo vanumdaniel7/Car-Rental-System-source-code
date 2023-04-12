@@ -1,5 +1,5 @@
-import { Text, IconButton, Menu, MenuButton, MenuList, MenuItem, Image, AspectRatio, ModalFooter, Center, ModalCloseButton, ModalBody, useDisclosure, ModalContent, ModalHeader, Modal, ModalOverlay, Button, Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableContainer, Hide, Badge, useToast } from '@chakra-ui/react'
-import { useEffect } from 'react';
+import { Spinner, Text, IconButton, Menu, MenuButton, MenuList, MenuItem, Image, AspectRatio, ModalFooter, Center, ModalCloseButton, ModalBody, useDisclosure, ModalContent, ModalHeader, Modal, ModalOverlay, Button, Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableContainer, Hide, Badge, useToast } from '@chakra-ui/react'
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { adminActions } from '../../Store';
 import AddToInventory from "./AddToInventory.js";
@@ -11,9 +11,11 @@ const OptionButton = props => {
     badgeColors.set("rented", "red");
     badgeColors.set("available", "green");
     badgeColors.set("repaired", "yellow");
+    const [isLoading, setIsLoading] = useState(false);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const sellHandler = async () => {
         try {
+            setIsLoading(true);
             const result = await fetch(`http://localhost:3000/admin/${props.details.numberplate}/sell`, {
                 method: "DELETE",
                 mode: "cors",
@@ -35,6 +37,7 @@ const OptionButton = props => {
                 duration: 10000,
                 isClosable: true,
             });
+            setIsLoading(false);
         } catch(err) {
             toast({
                 position: "top",
@@ -44,10 +47,12 @@ const OptionButton = props => {
                 duration: 10000,
                 isClosable: true,
             });
+            setIsLoading(false);
         }
     }
     const repairHandler = async () => {
         try {
+            setIsLoading(true);
             const result = await fetch(`http://localhost:3000/admin/${props.details.numberplate}/repair`, {
                 method: "PATCH",
                 mode: "cors",
@@ -69,6 +74,7 @@ const OptionButton = props => {
                 duration: 10000,
                 isClosable: true,
             });
+            setIsLoading(false);
         } catch(err) {
             toast({
                 position: "top",
@@ -78,10 +84,12 @@ const OptionButton = props => {
                 duration: 10000,
                 isClosable: true,
             });
+            setIsLoading(false);
         }
     }
     const retrieveHandler = async () => {
         try {
+            setIsLoading(true);
             const result = await fetch(`http://localhost:3000/admin/${props.details.numberplate}/retrieve`, {
                 method: "PATCH",
                 mode: "cors",
@@ -106,6 +114,7 @@ const OptionButton = props => {
                 duration: 10000,
                 isClosable: true,
             });
+            setIsLoading(false);
         } catch(err) {
             toast({
                 position: "top",
@@ -115,6 +124,7 @@ const OptionButton = props => {
                 duration: 10000,
                 isClosable: true,
             });
+            setIsLoading(false);
         }
     }
     return (
@@ -194,13 +204,13 @@ const OptionButton = props => {
                         {
                             props.details.carstatus === "available" ?
                                 <>
-                                    <Button onClick = {sellHandler} colorScheme = "teal" mr = "10px">Sell Car</Button>
-                                    <Button onClick = {repairHandler} colorScheme = "teal">Repair Car</Button>
+                                    <Button onClick = {sellHandler} colorScheme = "teal" mr = "10px">{isLoading ? <Spinner/> : "Sell Car"}</Button>
+                                    <Button onClick = {repairHandler} colorScheme = "teal">{isLoading ? <Spinner/> : "Repair Car"}</Button>
                                 </>
                                 :
                                 props.details.carstatus === "repaired" ? 
                                     <>
-                                        <Button onClick = {retrieveHandler} colorScheme = "teal">Retrieve Car</Button>
+                                        <Button onClick = {retrieveHandler} colorScheme = "teal">{isLoading ? <Spinner/> : "Retrieve Car"}</Button>
                                     </>
                                     :
                                     ""
