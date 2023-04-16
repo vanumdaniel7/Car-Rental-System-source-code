@@ -1,50 +1,9 @@
-import { useToast, Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableCaption, TableContainer, Show } from '@chakra-ui/react'
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { userActions } from '../../Store';
+import { Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableCaption, TableContainer, Show } from '@chakra-ui/react';
+import { useSelector } from 'react-redux';
 import ReturnDetails from "./ReturnDetails";
 
 const ReturnedList = () => {
-    const toast = useToast();
-    const dispatch = useDispatch();
     const returnedCars = useSelector(state => state.user.returnedCars);
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const result = await fetch("http://localhost:3000/auth/return", {
-                    method: "GET",
-                    mode: "cors",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "authorization": localStorage.getItem("token")
-                    }
-                });
-                const res = await result.json();
-                if(res.status === "success") {
-                    dispatch(userActions.getReturnedCars(res.data));
-                }
-                toast({
-                    position: "top",
-                    title: res.title,
-                    description: res.info,
-                    status: res.status,
-                    duration: 10000,
-                    isClosable: true,
-                });
-            } catch(err) {
-                console.log(err);
-                toast({
-                    position: "top",
-                    title: "Error",
-                    description: "An error occured, please try again later",
-                    status: "error",
-                    duration: 10000,
-                    isClosable: true,
-                });
-            }
-        }
-        fetchData();
-    }, [dispatch, toast]);
     return (
         <TableContainer>
             <Table variant = 'simple'>

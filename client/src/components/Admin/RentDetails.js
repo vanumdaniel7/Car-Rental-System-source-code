@@ -1,7 +1,5 @@
-import { Image, AspectRatio, ModalFooter, Center, ModalCloseButton, ModalBody, useDisclosure, ModalContent, ModalHeader, Modal, ModalOverlay, Button, Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableContainer, Hide, Badge, useToast } from '@chakra-ui/react'
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { adminActions } from '../../Store';
+import { Image, AspectRatio, ModalFooter, Center, ModalCloseButton, ModalBody, useDisclosure, ModalContent, ModalHeader, Modal, ModalOverlay, Button, Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableContainer, Hide, Badge } from '@chakra-ui/react'
+import { useSelector } from 'react-redux';
 import ReturnCarButton from './ReturnCarButton';
 
 const badgeColors = new Map();
@@ -21,7 +19,7 @@ const OptionButton = props => {
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay/>
                 <ModalContent width = "95%">
-                    <ModalHeader>Car Details</ModalHeader>
+                    <ModalHeader>Rent Details</ModalHeader>
                     <ModalCloseButton/>
                     <ModalBody px = "0">
                         <Center>
@@ -133,45 +131,7 @@ const OptionButton = props => {
 }
 
 const RentDetails = () => {
-    const toast = useToast();
-    const dispatch = useDispatch();
     const rents = useSelector(state => state.admin.rents);
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const result = await fetch("http://localhost:3000/admin/rents", {
-                    method: "GET",
-                    mode: "cors",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "authorization": localStorage.getItem("adminToken")
-                    }
-                });
-                const res = await result.json();
-                if(res.status === "success") {
-                    dispatch(adminActions.getRents(res.data));
-                }
-                toast({
-                    position: "top",
-                    title: res.title,
-                    description: res.info,
-                    status: res.status,
-                    duration: 10000,
-                    isClosable: true,
-                });
-            } catch(err) {
-                toast({
-                    position: "top",
-                    title: "Error",
-                    description: "An error occured, please try again later",
-                    status: "error",
-                    duration: 10000,
-                    isClosable: true,
-                });
-            }
-        }
-        fetchData();
-    }, [toast, dispatch]);
     return (
         <>
             <TableContainer>

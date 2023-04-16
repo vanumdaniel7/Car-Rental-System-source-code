@@ -12,18 +12,6 @@ const SignupFormMin = () => {
         event.preventDefault();
         setIsLoading(true);
         try {
-            if(!(nameRef.current.value.search(/[^a-zA-Z]+/) === -1)) {
-                toast({
-                    position: "top",
-                    title: "Warning",
-                    description: "Name can only contain alphabets",
-                    status: "warning",
-                    duration: 10000,
-                    isClosable: true,
-                });
-                setIsLoading(false);
-                return;
-            }
             const data = {
                 name: nameRef.current.value,
                 email: emailRef.current.value,

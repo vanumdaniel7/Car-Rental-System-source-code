@@ -1,52 +1,16 @@
 import { Text, Select, Input, Button, Modal, ModalBody, ModalOverlay, ModalContent, ModalCloseButton, ModalFooter, ModalHeader, useDisclosure, FormLabel, FormControl, useToast, Spinner } from "@chakra-ui/react";
-import { useState, useEffect, useRef } from "react";
-import { useHistory } from "react-router-dom";
+import { useState, useRef } from "react";
+import { useSelector } from "react-redux";
 
 const AddToInventory = () => {
-    const history = useHistory();
     const toast = useToast();
     const idRef = useRef("");
     const typeRef = useRef("");
     const mileMeterRef = useRef("");
     const numberPlateRef = useRef("");
     const [isLoading, setIsLoading] = useState(false);
-    const [carModels, setCarModels] = useState([]);
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const result = await fetch("http://localhost:3000/cars/models", {
-                    method: "GET",
-                    mode: "cors",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "authorization": localStorage.getItem("adminToken")
-                    }
-                });
-                const res = await result.json();
-                if(res.status === "success") {
-                    setCarModels(res.data);
-                }
-                toast({
-                    position: "top",
-                    title: res.title,
-                    description: res.info,
-                    status: res.status,
-                    duration: 10000,
-                    isClosable: true,
-                });
-            } catch(err) {
-                toast({
-                    position: "top",
-                    title: "Error",
-                    description: "An error occured, please try again later",
-                    status: "error",
-                    duration: 10000,
-                    isClosable: true,
-                });
-            }
-        }
-        fetchData();
-    }, [history, toast]);
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const carModels = useSelector(state => state.admin.cars);
     const addCarHandler = async event => {
         try {
             event.preventDefault();
@@ -56,7 +20,7 @@ const AddToInventory = () => {
                 carType: typeRef.current.value,
                 numberPlate: numberPlateRef.current.value,
                 mileMeterReading: mileMeterRef.current.value
-            }
+            };
             const result = await fetch("http://localhost:3000/cars/", {
                 method: "POST",
                 mode: "cors",
@@ -90,7 +54,6 @@ const AddToInventory = () => {
             setIsLoading(false);
         }
     }
-    const { isOpen, onOpen, onClose } = useDisclosure();
     return (
         <>
             <Button colorScheme = "teal" size = "sm" borderRadius = "4px" onClick = {onOpen}>Add Car</Button>

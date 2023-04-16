@@ -1,6 +1,7 @@
 import { Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableContainer, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, useDisclosure, Text } from "@chakra-ui/react";
 const ReturnDetails = props => {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    console.log(props.details);
     return (
         <>
             <Button onClick = {onOpen} variant = "outline" colorScheme = "teal">Reciept</Button>
@@ -47,7 +48,7 @@ const ReturnDetails = props => {
                                     </Tr>
                                     <Tr>
                                         <Td>Per Hour Charge</Td>
-                                        <Td>{props.rupeeperhour}</Td>
+                                        <Td>{props.details.rupeeperhour}</Td>
                                     </Tr>
                                     <Tr>
                                         <Td>Gas Consumed</Td>

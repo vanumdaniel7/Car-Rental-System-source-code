@@ -26,6 +26,7 @@ const RechargeBalance = () => {
                 }
             });
             const res = await result.json();
+            console.log(res);
             onClose();
             if(res.status === "success") {
                 dispatch(userActions.updateBalance(data.balance));

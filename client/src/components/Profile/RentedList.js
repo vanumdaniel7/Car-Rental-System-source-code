@@ -1,49 +1,9 @@
-import { useToast, Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableCaption, TableContainer, Show } from '@chakra-ui/react'
+import { Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableCaption, TableContainer, Show } from '@chakra-ui/react'
 import RentDetails from './RentDetails';
-import { useSelector, useDispatch } from 'react-redux';
-import { userActions } from "../../Store";
-import { useEffect } from "react";
+import { useSelector } from 'react-redux';
 
 const RentedList = () => {
-    const toast = useToast();
-    const dispatch = useDispatch();
     const rentedCars = useSelector(state => state.user.rentedCars);
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const result = await fetch("http://localhost:3000/auth/rent", {
-                    method: "GET",
-                    mode: "cors",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "authorization": localStorage.getItem("token")
-                    }
-                });
-                const res = await result.json();
-                if(res.status === "success") {
-                    dispatch(userActions.getRentedCars(res.data));
-                }
-                toast({
-                    position: "top",
-                    title: res.title,
-                    description: res.info,
-                    status: res.status,
-                    duration: 10000,
-                    isClosable: true,
-                });
-            } catch(err) {
-                toast({
-                    position: "top",
-                    title: "Error",
-                    description: "An error occured, please try again later",
-                    status: "error",
-                    duration: 10000,
-                    isClosable: true,
-                });
-            }
-        }
-        fetchData();
-    }, [toast, dispatch]);
     return (
         <TableContainer>
             <Table variant = "simple">
@@ -73,7 +33,7 @@ const RentedList = () => {
                 </Tfoot>
             </Table>
         </TableContainer>
-    )
+    );
 }
 
 export default RentedList;

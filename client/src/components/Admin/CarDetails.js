@@ -1,5 +1,5 @@
 import { useToast, Spinner, ModalBody, Modal, ModalFooter, Button, ModalContent, ModalHeader, ModalCloseButton, useDisclosure, ModalOverlay, AspectRatio, Center, Image, Tfoot, Th, Table, TableContainer, Text, MenuButton, IconButton, MenuList, Menu, MenuItem, Thead, Td, Hide, Tr, Tbody } from "@chakra-ui/react"
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { adminActions } from "../../Store";
 import AddToCar from "./AddToCar"
@@ -102,45 +102,8 @@ const OptionButton = props => {
 }
 
 const CarDetails = () => {
-    const toast = useToast();
     const dispatch = useDispatch();
     const cars = useSelector(state => state.admin.cars);
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const result = await fetch("http://localhost:3000/admin/cars", {
-                    method: "GET",
-                    mode: "cors",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "authorization": localStorage.getItem("adminToken")
-                    }
-                });
-                const res = await result.json();
-                if(res.status === "success") {
-                    dispatch(adminActions.getCarModels(res.data));
-                }
-                toast({
-                    position: "top",
-                    title: res.title,
-                    description: res.info,
-                    status: res.status,
-                    duration: 10000,
-                    isClosable: true,
-                });
-            } catch(err) {
-                toast({
-                    position: "top",
-                    title: "Error",
-                    description: "An error occured, please try again later",
-                    status: "error",
-                    duration: 10000,
-                    isClosable: true,
-                });
-            }
-        }
-        fetchData();
-    }, [dispatch, toast]);
     return (
         <>
             <AddToCar/>

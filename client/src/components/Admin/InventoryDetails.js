@@ -1,5 +1,5 @@
 import { Spinner, Text, IconButton, Menu, MenuButton, MenuList, MenuItem, Image, AspectRatio, ModalFooter, Center, ModalCloseButton, ModalBody, useDisclosure, ModalContent, ModalHeader, Modal, ModalOverlay, Button, Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableContainer, Hide, Badge, useToast } from '@chakra-ui/react'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { adminActions } from '../../Store';
 import AddToInventory from "./AddToInventory.js";
@@ -224,49 +224,12 @@ const OptionButton = props => {
 }
 
 const InventoryDetails = () => {
-    const toast = useToast();
     const dispatch = useDispatch();
     const badgeColors = new Map();
     badgeColors.set("rented", "red");
     badgeColors.set("repaired", "yellow");
     badgeColors.set("available", "green");
     const inventory = useSelector(state => state.admin.inventory);
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const result = await fetch("http://localhost:3000/admin/inventory?availablity=", {
-                    method: "GET",
-                    mode: "cors",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "authorization": localStorage.getItem("adminToken")
-                    }
-                });
-                const res = await result.json();
-                if(res.status === "success") {
-                    dispatch(adminActions.getInventory(res.data));
-                }    
-                toast({
-                    position: "top",
-                    title: res.title,
-                    description: res.info,
-                    status: res.status,
-                    duration: 10000,
-                    isClosable: true,
-                });
-            } catch(err) {
-                toast({
-                    position: "top",
-                    title: "Error",
-                    description: "An error occured, please try again later",
-                    status: "error",
-                    duration: 10000,
-                    isClosable: true,
-                });
-            }
-        }
-        fetchData();
-    }, [toast, dispatch]);
     return (
         <>
             <AddToInventory/>
