@@ -33,7 +33,7 @@ module.exports = {
     },
     sendPasswordResetEmail: async (id, email, name) => {
         const token = jwt.sign({ 
-            data: { userid: id, name: name, email: email},
+            data: { userid: id, name: name, email: email },
             exp: Math.floor(Date.now() / 1000) + (60 * 60) 
         }, process.env.ACCESS_TOKEN_SECRET);
         const mailOptions = {

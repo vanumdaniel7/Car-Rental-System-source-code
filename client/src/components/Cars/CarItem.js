@@ -22,8 +22,8 @@ const CarItem = props => {
                 <Table variant = 'simple'>
                     <Thead>
                         <Tr>
-                            <Th px = "0px" textAlign = "center">Car Name</Th>
-                            <Th px = "0px" textAlign = "center">{props.details.carname}</Th>
+                            <Th maxWidth = "50px" whiteSpace = "nowrap" overflow= "hidden" textOverflow= "ellipsis" px = "0px" textAlign = "center">Car Name</Th>
+                            <Th maxWidth = "50px" whiteSpace = "nowrap" overflow= "hidden" textOverflow= "ellipsis" px = "0px" textAlign = "center">{props.details.carname}</Th>
                         </Tr>
                     </Thead>
                     <Tbody>

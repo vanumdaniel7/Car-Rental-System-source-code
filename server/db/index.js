@@ -9,7 +9,16 @@ const randomInRange = (start, end) => Math.floor(Math.random() * (end - start + 
 module.exports = {
     client: client,
     connect: async () => {
-        await client.connect();
+        try {
+            await client.connect();
+        } catch(err) {
+            console.log(err);
+        }
+    },
+    query: async () => {
+        const query = "SELECT * FROM USERS";
+        const result = await client.query(query);
+        console.log(result.rows);
     },
     createUserTable: async () => {
         try {
@@ -110,7 +119,7 @@ module.exports = {
             const query1 = `CREATE TYPE carStatusEnum AS ENUM('available', 'rented', 'repaired');`;
             const query2 = `CREATE TYPE carTypeEnum AS ENUM('AC', 'NONAC');`;
             const query3 = `CREATE TYPE rentStatusEnum AS ENUM('active', 'requestedToReturn', 'returned');`;
-            // await client.query(query1);
+            await client.query(query1);
             await client.query(query2);
             await client.query(query3);
         
@@ -169,14 +178,12 @@ module.exports = {
             const result1 = await client.query(query1);
             if(result1.rows.length === 1) {
                 if(result1.rows[0].isverified === true) {
-                
                     return { 
                         info: "Account with this email already exists, please try with another email", 
                         status: "info", 
                         title: "Account already exists" 
                     };
                 } else {
-                
                     await mailer.sendVerificationLink(result1.rows[0].id, result1.rows[0].email, result1.rows[0].name);
                     return { 
                         info: "Account with this email already exists, please click on the verification link sent to your email to continue login", 
@@ -191,7 +198,6 @@ module.exports = {
             const result3 = await client.query(query3);
             const userid = parseInt(result3.rows[0].userid);
             await mailer.sendVerificationLink(userid, email, name);
-        
             return { 
                 info: "Account successfully created, please click on the verification link sent to your email to continue login", 
                 status: "success", 
@@ -230,7 +236,6 @@ module.exports = {
             const query = `SELECT * FROM users WHERE email = '${email}'`;
             const result = await client.query(query);
             if(result.rows.length === 0 || !await bcrypt.compare(password, result.rows[0].password)) {
-            
                 return { 
                     info: "Invalid credentials", 
                     status: "error", 
@@ -238,7 +243,6 @@ module.exports = {
                 };
             } else if(result.rows[0].isverified === false) {
                 await mailer.sendVerificationLink(result.rows[0].id, result.rows[0].email, result.rows[0].name);
-            
                 return { 
                     info: "User is not verified, but dont worry we have sent you a verification mail to your email", 
                     status: "warning", 
@@ -247,12 +251,18 @@ module.exports = {
             }
             result.rows[0].datejoined = new Date(parseInt(result.rows[0].datejoined));
             result.rows[0].datejoined = result.rows[0].datejoined.toLocaleDateString("en-AU");
-        
             return { 
                 info: "Login Successful", 
                 status: "success", 
                 title: "Login Successful", 
-                data: result.rows[0] 
+                data: {
+                    userid:  result.rows[0].userid,
+                    email: result.rows[0].email,
+                    name: result.rows[0].name,
+                    isverified: result.rows[0].isverified,
+                    datejoined: result.rows[0].datejoined,
+                    balance: result.rows[0].balance
+                }
             };
         } catch(err) {
             throw err;
@@ -344,7 +354,6 @@ module.exports = {
             } else {
                 result = [...result1.rows, ...result2.rows];
             }
-        
             return {
                 status: "success",
                 title: "Success",
@@ -375,7 +384,6 @@ module.exports = {
             ;`;
             const result1 = await client.query(query1);
             if(result1.rows.length === 0) {
-            
                 return {
                     status: "info",
                     title: "Info",
@@ -385,7 +393,6 @@ module.exports = {
             const query2 = `SELECT balance FROM users WHERE userId = ${userid};`;
             const result2 = await client.query(query2);
             if(parseInt(result2.rows[0].balance) < Math.floor(carType === "AC" ? parseInt(result1.rows[0].baseamount) * 1.5 : parseInt(result1.rows[0].baseamount))) {
-            
                 return {
                     status: "warning",
                     title: "warning",
@@ -398,7 +405,6 @@ module.exports = {
             await client.query(query4);
             const query5 = `INSERT INTO RENTS(userid, numberPlate, expectedReturn, mileMeterStart, rentedOn, rentStatus) VALUES (${userid}, '${result1.rows[0].numberplate}', '${expectedReturn}', ${result1.rows[0].milemeterstart}, '${Date.now()}', 'active');`;
             await client.query(query5);
-        
             return {
                 status: "success",
                 info: "Car Successfully rented",
@@ -411,7 +417,10 @@ module.exports = {
     getUserRentedCars: async userid => {
         try {
             const query = `
-                SELECT * FROM cars 
+                SELECT 
+                    * 
+                FROM 
+                    cars 
                 INNER JOIN 
                     inventory ON cars.carId = inventory.carId 
                 INNER JOIN 
@@ -780,7 +789,6 @@ module.exports = {
             const query5 = `SELECT * FROM users WHERE userid = ${userid};`;
             const result5 = await client.query(query5);
             if(parseInt(result5.rows[0].balance) < roamingCost - refundAmount) {
-            
                 return {
                     status: "warning",
                     title: "warning",

@@ -13,7 +13,7 @@ router.post("/login", async (req, res) => {
         const { adminAccessKey } = req.body;
         if(adminAccessKey === process.env.ADMIN_ACCESS_KEY) {
             const token = jwt.sign({
-                adminAccessKey: adminAccessKey
+                adminAccessKey: "theAdminAccessKey"
             }, process.env.ADMIN_ACCESS_KEY);
             return res.json({
                 status: "success",

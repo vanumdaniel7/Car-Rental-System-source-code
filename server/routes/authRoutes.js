@@ -13,11 +13,10 @@ router.post("/", async (req, res) => {
         res.json({
             info: "An unexpected error occured, please try again later", 
             status: "error", 
-            title: "Error" 
+            title: "Error"
         });
     }
 });
-
 
 router.get("/rent", auth.requireAuthentication, async (req, res) => {
     try {
