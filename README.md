@@ -1,4 +1,4 @@
-<div align="center">
+![image](https://github.com/vanumdaniel7/car-rental-system-source-code/assets/98738744/7590ad03-0e34-4e7e-9c07-a1af553cfbb1)<div align="center">
   <h3 align="center">Car Rental System</h3>
   <p align="center">A full stack web application for managing car rental service</p>
 </div>
@@ -44,10 +44,9 @@
 ### Admin Page URLs
 * https://car-rental-system-g6bb.onrender.com/admin
 * https://silly-lime-crane.cyclic.app/admin
-
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][![image](https://github.com/vanumdaniel7/car-rental-system-source-code/assets/98738744/d2ad22c4-a95e-4690-a4dc-d2b4f990342d)]](https://example.com)
 
 There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
 
