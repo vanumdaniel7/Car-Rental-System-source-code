@@ -46,7 +46,7 @@
 * https://silly-lime-crane.cyclic.app/admin
 ## About The Project
 
-[![Car Rental System Screen Shot][![image](https://github.com/vanumdaniel7/car-rental-system-source-code/assets/98738744/d2ad22c4-a95e-4690-a4dc-d2b4f990342d)](https://car-rental-system-g6bb.onrender.com/)
+[![Car Rental System Screen Shot]][![image](https://github.com/vanumdaniel7/car-rental-system-source-code/assets/98738744/d2ad22c4-a95e-4690-a4dc-d2b4f990342d)](https://car-rental-system-g6bb.onrender.com/)
 
 There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
 
