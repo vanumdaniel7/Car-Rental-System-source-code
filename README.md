@@ -9,8 +9,8 @@
     <li>
       <a href="#website-urls">Website URLs</a>
       <ul>
-        <li><a href="#user-urls">User Page</a></li>
-        <li><a href="#admin-urls">Admin Page</a></li>
+        <li><a href="#user-urls">User Page URLs</a></li>
+        <li><a href="#admin-urls">Admin Page URLs</a></li>
       </ul>
     </li>
     <li>
@@ -37,11 +37,11 @@
 
 ## Website URLs
 
-### User Page
+### User Page URLs
 * https://car-rental-system-g6bb.onrender.com/
 * https://silly-lime-crane.cyclic.app/
 
-### Admin Page
+### Admin Page URLs
 * https://car-rental-system-g6bb.onrender.com/admin
 * https://silly-lime-crane.cyclic.app/admin
 
