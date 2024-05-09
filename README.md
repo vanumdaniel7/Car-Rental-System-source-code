@@ -8,6 +8,10 @@
   <ol>
     <li>
       <a href="#website-urls">Website URLs</a>
+      <ul>
+        <li><a href="#user-urls">User Page</a></li>
+        <li><a href="#admin-urls">Admin Page</a></li>
+      </ul>
     </li>
     <li>
       <a href="#about-the-project">About The Project</a>
@@ -33,6 +37,13 @@
 
 ## Website URLs
 
+### User Page
+* https://car-rental-system-g6bb.onrender.com/
+* https://silly-lime-crane.cyclic.app/
+
+### Admin Page
+* https://car-rental-system-g6bb.onrender.com/admin
+* https://silly-lime-crane.cyclic.app/admin
 
 ## About The Project
 
