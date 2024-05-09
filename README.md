@@ -1,4 +1,4 @@
-![image](https://github.com/vanumdaniel7/car-rental-system-source-code/assets/98738744/7590ad03-0e34-4e7e-9c07-a1af553cfbb1)<div align="center">
+<div align="center">
   <h3 align="center">Car Rental System</h3>
   <p align="center">A full stack web application for managing car rental service</p>
 </div>
