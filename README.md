@@ -54,7 +54,7 @@
 Car Rental System is a full-stack web application designed to streamline the process of managing car rental services. It provides an intuitive platform for both users and administrators to browse available vehicles, make reservations, manage bookings, and handle administrative tasks efficiently.
 
 Features:
-* **Authentication features such as**:
+* **Authentication features**:
   - User-friendly signup and signin processes.
   - Password reset functionality via email for user convenience.
   - Email verification to ensure account security.
