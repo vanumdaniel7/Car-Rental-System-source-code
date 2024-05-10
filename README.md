@@ -27,11 +27,6 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -78,11 +73,8 @@ Features:
 * [![React][React.js]][React-url]
 * [![Node][Node.js]][Node-url]
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
-<!-- GETTING STARTED -->
 ## Getting Started
 
 This is an example of how you may give instructions on setting up your project locally.
@@ -113,21 +105,6 @@ _Below is an example of how you can instruct your audience on installing and set
    ```js
    const API_KEY = 'ENTER YOUR API';
    ```
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 [PostgreSQL]: https://img.shields.io/badge/postgresql-4169e1?style=for-the-badge&logo=postgresql&logoColor=white
 [PostgreSQL-url]: https://www.postgresql.org/
