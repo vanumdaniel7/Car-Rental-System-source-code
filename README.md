@@ -72,20 +72,25 @@ Features:
 
 ## Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+1. **Get Database URI and Gmail Account**:
+   - Obtain a free database URI at [https://www.postgresql.org/](https://www.postgresql.org/)
+   - Create a Gmail account for sending emails and obtain its app password.
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+2. **Clone the Repository**:
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/vanumdaniel7/car-rental-system-source-code.git
    ```
-3. Install NPM packages
+3. Navigate to both the client and server folders and run:
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
+4. Create an .env file in the server folder and add the following environment variables
    ```js
-   const API_KEY = 'ENTER YOUR API';
+   CONNECTION_STRING=<PostgreSQL URI>
+   MAIL_PASSWORD=<App password the gmail account>
+   DOMAIN=<Domain of the web application>
+   ACCESS_TOKEN_SECRET=<Access token secret used for JWT authentication>
+   ADMIN_ACCESS_KEY=<Admin page password>
    ```
 
 [PostgreSQL]: https://img.shields.io/badge/postgresql-4169e1?style=for-the-badge&logo=postgresql&logoColor=white
