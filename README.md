@@ -74,7 +74,7 @@ Features:
 ### Built With
 
 * [![PostgreSQL][PostgreSQL]][PostgreSQL-url]
-* [![Express][Express]][Express-url]
+* [![Express][Express.js]][Express-url]
 * [![React][React.js]][React-url]
 * [![Vue][Vue.js]][Vue-url]
 * [![Angular][Angular.io]][Angular-url]
