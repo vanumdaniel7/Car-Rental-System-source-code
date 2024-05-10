@@ -85,7 +85,7 @@ Features:
    npm install
    ```
 4. Create an .env file in the server folder and add the following environment variables
-   ```sh
+   ```text
    CONNECTION_STRING=<PostgreSQL URI>
    MAIL_PASSWORD=<App password the gmail account>
    DOMAIN=<Domain of the web application>
