@@ -93,11 +93,11 @@ Features:
    ADMIN_ACCESS_KEY=<Admin page password>
    ```
 5. Start the Application
-   Navigate to the server folder and run the following command to start the server:
+   * Navigate to the server folder and run the following command to start the server:
      ```sh
      node index.js
      ```
-   Navigate to the client folder and run the following command to start the client:
+   * Navigate to the client folder and run the following command to start the client:
      ```sh
      npm start
      ```
