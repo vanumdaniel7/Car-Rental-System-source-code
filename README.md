@@ -92,6 +92,15 @@ Features:
    ACCESS_TOKEN_SECRET=<Access token secret used for JWT authentication>
    ADMIN_ACCESS_KEY=<Admin page password>
    ```
+5. Start the Application
+   - Navigate to the server folder and run the following command to start the server:
+     ```sh
+     node index.js
+     ```
+   - Navigate to the client folder and run the following command to start the client:
+     ```sh
+     npm start
+     ```
 
 [PostgreSQL]: https://img.shields.io/badge/postgresql-4169e1?style=for-the-badge&logo=postgresql&logoColor=white
 [PostgreSQL-url]: https://www.postgresql.org/
