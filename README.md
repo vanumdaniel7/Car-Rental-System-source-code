@@ -44,24 +44,32 @@
 ### Admin Page URLs
 * https://car-rental-system-g6bb.onrender.com/admin
 * https://silly-lime-crane.cyclic.app/admin
+
+
+
 ## About The Project
 
 [![image](https://github.com/vanumdaniel7/car-rental-system-source-code/assets/98738744/d2ad22c4-a95e-4690-a4dc-d2b4f990342d)](https://car-rental-system-g6bb.onrender.com/)
 
-Car Rental System is a full stack web application build to manage car rental services
+Car Rental System is a full-stack web application designed to streamline the process of managing car rental services. It provides an intuitive platform for both users and administrators to browse available vehicles, make reservations, manage bookings, and handle administrative tasks efficiently.
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
+Features:
+* **Authentication features such as**:
+  - User-friendly signup and signin processes.
+  - Password reset functionality via email for user convenience.
+  - Email verification to ensure account security.
+
+* **User Functions**:
+  - Comprehensive car search capabilities.
+  - Convenient rental and return processes.
+  - Flexible profile management options.
+  - Ability to add balance to accounts for extended rental options.
+
+* **Admin Functions**:
+  - Effortless addition or removal of cars from the system.
+  - Streamlined management of rental operations.
 
 Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
-
-Use the `BLANK_README.md` to get started.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 ### Built With
 
